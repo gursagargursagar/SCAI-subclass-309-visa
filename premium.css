@@ -1,0 +1,11 @@
+.report-cta{
+  position:relative;
+  border-color:#facc15 !important;
+  box-shadow:0 0 0 1px rgba(250,204,21,.42),0 0 18px rgba(250,204,21,.28),0 0 42px rgba(250,204,21,.12);
+  animation:scaiPremiumGlow 2.4s ease-in-out infinite alternate;
+}
+@keyframes scaiPremiumGlow{
+  from{box-shadow:0 0 0 1px rgba(250,204,21,.34),0 0 14px rgba(250,204,21,.20),0 0 30px rgba(250,204,21,.08)}
+  to{box-shadow:0 0 0 1px rgba(250,204,21,.72),0 0 24px rgba(250,204,21,.42),0 0 54px rgba(250,204,21,.18)}
+}
+@media (prefers-reduced-motion: reduce){.report-cta{animation:none}}
