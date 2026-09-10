@@ -1,0 +1,36 @@
+name: IndexNow - Visa
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for production deployment and notify IndexNow
+        shell: bash
+        run: |
+          set -euo pipefail
+          KEY='334f19034f95d67afae6951cd875c222'
+          KEY_URL="https://visa.swisscheeseai.au/${KEY}.txt"
+
+          ready=''
+          for attempt in $(seq 1 30); do
+            body="$(curl -fsSL --max-time 10 "$KEY_URL" 2>/dev/null || true)"
+            if [ "$body" = "$KEY" ]; then
+              ready='yes'
+              break
+            fi
+            sleep 10
+          done
+
+          if [ "$ready" != 'yes' ]; then
+            echo 'Production IndexNow key did not become available in time.' >&2
+            exit 1
+          fi
+
+          curl --fail-with-body --retry 2 --retry-delay 5 \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data '{"host":"visa.swisscheeseai.au","key":"334f19034f95d67afae6951cd875c222","keyLocation":"https://visa.swisscheeseai.au/334f19034f95d67afae6951cd875c222.txt","urlList":["https://visa.swisscheeseai.au/"]}' \
+            https://api.indexnow.org/indexnow
