@@ -1,0 +1,14 @@
+# Subclass 309 Grant Horizon — Swiss Cheese AI
+
+Canonical URL: https://visa.swisscheeseai.au/
+
+This site provides a statistical planning model for estimating a likely Australian Partner (Provisional) visa subclass 309 decision window from processing-time benchmarks.
+
+Key facts:
+- Free web tool.
+- Results are estimates, not guarantees.
+- It is not an official Department of Home Affairs decision predictor.
+- The tool models a likely timing window from benchmark inputs.
+
+Primary source: https://visa.swisscheeseai.au/
+Sitemap: https://visa.swisscheeseai.au/sitemap.xml
