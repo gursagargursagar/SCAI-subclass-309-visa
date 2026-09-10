@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://visa.swisscheeseai.au/sitemap.xml
