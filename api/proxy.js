@@ -80,6 +80,12 @@ function injectSeo(html) {
 }
 
 module.exports = async function handler(req, res) {
+  // Keep visa.swisscheeseai.au on the original calculator.
+  // Only the explicitly named Howlong domains receive the new directory.
+  const hostname = String(req.headers.host || '').split(':')[0].toLowerCase();
+  if (hostname === 'howlong.au' || hostname === 'www.howlong.au') {
+    return require('./howlong.js')(req, res);
+  }
   try {
     const upstream = await fetch('https://tuqyajzkaggbclpzpgby.supabase.co/functions/v1/visa-page', {
       headers: { 'User-Agent': 'SwissCheeseAI-Vercel-Proxy/1.0' }
