@@ -1,4 +1,15 @@
 module.exports = async function visa309(req, res) {
+  // Temporary bypass: the direct submission flow on HowLong is not working.
+  // Send HowLong visitors to the original working visa application instead.
+  // Do not redirect requests from visa.swisscheeseai.au or other hosts.
+  const hostname = String(req.headers.host || '').split(':')[0].toLowerCase();
+  if (hostname === 'howlong.au' || hostname === 'www.howlong.au') {
+    res.statusCode = 307;
+    res.setHeader('Location', 'https://visa.swisscheeseai.au/');
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
+    res.setHeader('X-Robots-Tag', 'noindex');
+    return res.end();
+  }
   try {
     const upstream = await fetch("https://tuqyajzkaggbclpzpgby.supabase.co/functions/v1/visa-page", {
       headers: { "User-Agent": "Howlong-Visa-Proxy/1.0" },
